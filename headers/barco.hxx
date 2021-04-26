@@ -16,11 +16,11 @@
 
 class Barco{
 private:
-	int posicion[4]; 	/* Posicion del barco */
+	int posicion[4][4]; 	/* Posicion del barco */
 	std::string tipo;	/* El tipo de barco; ejemplo: "Destructor" "Portaaviones" */
 public:
-	Barco(std::string, int [4]);
-	void setPosicion(int [4]);
+	Barco(std::string, int [4][4]);
+	void setPosicion(int [4][4]);
 	void setTipo(std::string);
 
 	std::string getTipo(); /* Misc. added only for testing purposes */
