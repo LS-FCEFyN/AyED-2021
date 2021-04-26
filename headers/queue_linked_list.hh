@@ -10,6 +10,7 @@
 #ifndef QUEUE_LINKED_LIST_HH_
 #define QUEUE_LINKED_LIST_HH_
 
+/* Incluimos este header para poder utilizar << struct Node >> 
 #include "./stack_linked_list.hh"
 
 /* Estructura que representa una Cola de Pilas */
