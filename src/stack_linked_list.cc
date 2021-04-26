@@ -9,7 +9,7 @@
 /* para ver las declaraciones por favor vea */
 /* 			stack_linked_list.hh			*/
 
-#include "./stack_linked_list.hh"
+#include "../headers/stack_linked_list.hh"
 #include <stdlib.h>
 #include <stdio.h>
 
