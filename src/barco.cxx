@@ -13,15 +13,13 @@
 #include<string>
 #include "../headers/barco.hxx"
 
-Barco::Barco(std::string tipo, int posicion[4]) {
+Barco::Barco(std::string tipo, int posicion[4][4]) {
 	this->setTipo(tipo);
 	this->setPosicion(posicion);
 }
 
-void Barco::setPosicion(int posicion[4]) {
-	for(int i = 0; i < 4; i++) {
-		this->posicion[i] = posicion[i];
-	}
+void Barco::setPosicion(int posicion[4][4]) {
+	// TODO
 }
 
 void Barco::setTipo(std::string tipo) {
