@@ -7,9 +7,9 @@
 
 #include <iostream>
 #include <string>
-#include "./headers/stack_linked_list.hh"
-#include "./headers/queue_linked_list.hh"
-#include "./headers/barco.hxx"
+#include "../headers/stack_linked_list.hh"
+#include "../headers/queue_linked_list.hh"
+#include "../headers/barco.hxx"
 
 int main(int argc, char **argv) {
 
