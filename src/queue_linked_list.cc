@@ -11,7 +11,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "./queue_linked_list.hh"
+#include "../headers/queue_linked_list.hh"
 
 /* Punteros hacia el frente y la parte posterior de la cola respectivamente */
 struct Queue* front = NULL;
