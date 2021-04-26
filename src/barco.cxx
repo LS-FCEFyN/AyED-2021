@@ -11,7 +11,7 @@
  */
 
 #include<string>
-#include "./barco.hxx"
+#include "../headers/barco.hxx"
 
 Barco::Barco(std::string tipo, int posicion[4]) {
 	this->setTipo(tipo);
