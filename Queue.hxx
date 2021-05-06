@@ -12,8 +12,9 @@
 
 class Queue {
 private:
-	Stack *front;
-	Stack *rear;
+	Stack *stack;
+	Queue *front;
+	Queue *rear;
 public:
 	Queue();
 	void Enqueue(Stack*);
