@@ -8,6 +8,7 @@
 #include "./Queue.hxx"
 
 Queue::Queue() {
+	stack = nullptr;
 	front = nullptr;
 	rear = nullptr;
 }
