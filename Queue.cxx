@@ -5,42 +5,60 @@
  *      Author: Loretta
  */
 
-#include "./Queue.hxx"
+#include "queue.hxx"
 
-Queue::Queue() {
-	stack = nullptr;
-	front = nullptr;
-	rear = nullptr;
+/* Implementation of QueueNode constructor */
+template<typename T> QueueNode<T>::QueueNode(T data)
+{
+    this->data = data ;
+    next = nullptr ;
 }
 
-void Queue::Enqueue(Stack *stack) {
-	Stack *temp = new Stack();
-	temp->Push(stack->Peek()[0], stack->Peek()[1], temp);
-	if (isEmpty()) {
-		front = rear = temp;
-		return;
-	}
-	rear->setPrev(temp);
-	rear = temp;
+/* Implementation of Queue */
+template<typename T> Queue<T>::Queue()
+{
+    front = nullptr ;
+    rear = nullptr ;
 }
 
-void Queue::Dequeue() {
-	Stack *temp = front;
+
+template<typename T> void Queue<T>::Enqueue(T data)
+{
+    QueueNode<T>* temp = new QueueNode<T>(data);
+    if(isEmpty()) {
+        front = rear = temp ;
+    }
+    else {
+        rear->next  = temp ;
+        rear  = temp ;
+    }
+}
+
+template<typename T> void Queue<T>::Dequeue()
+{
+    QueueNode<T> *temp = front;
 	if (front == nullptr) {
 		return;
 	}
 	if (front == rear) {
 		front = rear = nullptr;
 	} else {
-		front = front->getPrev();
+		front = front->next;
 	}
 	delete (temp);
 }
 
-Stack* Queue::Front() {
-	return front;
+template<typename T> T Queue<T>::Front()
+{
+    if(isEmpty()) {
+        return nullptr ;
+    }
+    else {
+        return front->data;
+    }
 }
 
-bool Queue::isEmpty() {
-	return front == nullptr && rear == nullptr;
+template<typename T> bool Queue<T>::isEmpty()
+{
+    return front == nullptr ;
 }
