@@ -1,10 +1,3 @@
-/*
- * Queue.hxx
- *
- *  Created on: Apr 30, 2021
- *      Author: Loretta
- */
-
 #ifndef QUEUE_HXX_
 #define QUEUE_HXX_
 
