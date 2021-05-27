@@ -5,7 +5,7 @@
  *      Author: Loretta
  */
 
-#include "queue.hxx"
+#include "Queue.hxx"
 
 /* Implementation of QueueNode constructor */
 template<typename T> QueueNode<T>::QueueNode(T data)
