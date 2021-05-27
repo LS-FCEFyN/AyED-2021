@@ -1,10 +1,3 @@
-/*
- * Queue.cxx
- *
- *  Created on: Apr 30, 2021
- *      Author: Loretta
- */
-
 #include "Queue.hxx"
 
 /* Implementation of QueueNode constructor */
