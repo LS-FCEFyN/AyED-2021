@@ -1,27 +1,25 @@
-/*
- * Stack.hxx
- *
- *  Created on: Apr 30, 2021
- *      Author: Loretta
- */
-
 #ifndef STACK_HXX_
 #define STACK_HXX_
 
-class Stack {
-private:
-	int data[2];
-	Stack *prev;
+template <class T>
+class StackNode {
 public:
-	Stack();
-	void Push(int, int, Stack*&);
-	void Pop(Stack*&);
-	int* Peek();
-
-	Stack* getPrev();
-	void setPrev(Stack*&);
-
-	bool isEmpty();
+    StackNode(T);
+    T data{};
+    StackNode<T>* next;
 };
 
+template <class T>
+class Stack {
+private:
+    StackNode<T>* head;
+public:
+    Stack();
+    void Push(T);
+    void Pop();
+    T Peek();
+    bool isEmpty();
+};
+
+#include "./stack.cxx"
 #endif /* STACK_HXX_ */
