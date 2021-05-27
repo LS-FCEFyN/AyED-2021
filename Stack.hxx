@@ -21,5 +21,5 @@ public:
     bool isEmpty();
 };
 
-#include "./stack.cxx"
+#include "./Stack.cxx"
 #endif /* STACK_HXX_ */
