@@ -1,49 +1,44 @@
-/*
- * Stack.cxx
- *
- *  Created on: Apr 30, 2021
- *      Author: Loretta
- */
+#include "./stack.hxx"
 
-#include "./Stack.hxx"
-
-Stack::Stack() {
-	data[0] = 0;
-	data[1] = 0;
-	prev = nullptr;
+template<typename T> StackNode<T>::StackNode(T data)
+{
+    this->data = data;
+    next = nullptr;
 }
 
-void Stack::Push(int x, int y, Stack *&stack) {
-	Stack *temp = new Stack();
-	temp->data[0] = x;
-	temp->data[1] = y;
-	temp->prev = stack;
-	stack = temp;
+
+template<typename T> Stack<T>::Stack()
+{
+    head = nullptr;
 }
 
-void Stack::Pop(Stack *&stack) {
-	Stack *temp = new Stack();
-	if (isEmpty()) {
-		return;
-	}
-	temp = stack;
-	stack = temp->prev;
-	delete (temp);
+template<typename T> void Stack<T>::Push(T data)
+{
+    StackNode<T> *temp = new StackNode<T>(data);
+    if(isEmpty()) {
+        head = temp;
+    }
+    temp->next = head;
+    head = temp;
 }
 
-int* Stack::Peek() {
-	return data;
+template<typename T> void Stack<T>::Pop()
+{
+    StackNode<T> *temp = head;
+    if(isEmpty()) {
+        return;
+    }
+    head = temp->next;
+    delete(temp);
 }
 
-Stack* Stack::getPrev() {
-	return prev;
+template<typename T> T Stack<T>::Peek()
+{
+    return head->data;
 }
 
-void Stack::setPrev(Stack *&stack) {
-	prev = stack;
-}
 
-bool Stack::isEmpty() {
-	return prev == nullptr;
+template<typename T> bool Stack<T>::isEmpty()
+{
+    return head == nullptr;
 }
-
