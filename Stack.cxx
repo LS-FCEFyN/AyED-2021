@@ -1,4 +1,4 @@
-#include "./stack.hxx"
+#include "./Stack.hxx"
 
 template<typename T> StackNode<T>::StackNode(T data)
 {
