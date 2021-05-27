@@ -31,7 +31,7 @@ class Queue {
 
 };
 
-#include "./queue.cxx" /* Is it safe to do this ? */
+#include "./Queue.cxx" /* Is it safe to do this ? */
                        /* I should probably read the new ISO standar */
 
 #endif /* QUEUE_HXX_ */
