@@ -19,7 +19,9 @@ template <typename T> void nary_tree<T>::addChild(T data) {
 }
 
 template <typename T> void nary_tree<T>::addSibling(T data) {
-
+    parent->sibling = new nary_tree_node<T>(data);
+    parent = parent->sibling;
+    q->Enqueue(parent);
 }
 
 template <typename T> void nary_tree<T>::traverseTree() {
