@@ -4,6 +4,7 @@
 template <class T> class nary_tree_node {
 public:
   T data{};
+  int nivel;
   nary_tree_node<T> *child;
   nary_tree_node<T> *sibling;
   nary_tree_node(T);
@@ -11,14 +12,20 @@ public:
 
 template <class T> class nary_tree {
 private:
-  nary_tree_node<T> *parent;
-  Queue<nary_tree_node<T> *> *q;
+  int n{};
+  int nodes{};
 
-public:
-  nary_tree(T data);
   void addChild(T);
   void addSibling(T);
+
+  nary_tree_node<T> *parent;
+  Queue<nary_tree_node<T>*> *q;
+  Queue<nary_tree_node<T>*> *q1;
+
+public:
+  nary_tree(int);
   void traverseTree();
+  void add(T);
 };
 
 #include "./narytree.cxx"
