@@ -1,4 +1,3 @@
-#include "./queue.hxx"
 #include "./narytree.hxx"
 template <typename T> nary_tree_node<T>::nary_tree_node(T data) {
   sibling = child = nullptr;
