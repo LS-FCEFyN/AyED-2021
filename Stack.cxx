@@ -1,6 +1,6 @@
 #include "./Stack.hxx"
 
-template<typename T> StackNode<T>::StackNode(T data)
+template<typename T> explicit StackNode<T>::StackNode(T data)
 {
     this->data = data;
     next = nullptr;

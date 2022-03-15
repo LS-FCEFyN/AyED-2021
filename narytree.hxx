@@ -7,7 +7,7 @@ public:
   int nivel;
   nary_tree_node<T> *child;
   nary_tree_node<T> *sibling;
-  nary_tree_node(T);
+  explicit nary_tree_node(T);
 };
 
 template <class T> class nary_tree {
@@ -23,7 +23,9 @@ private:
   Queue<nary_tree_node<T>*> *q1;
 
 public:
-  nary_tree(int);
+  explicit nary_tree(int);
+  explicit nary_tree(const nary_tree &);
+  T& operator=(T&&) noexcept;
   void traverseTree();
   void add(T);
 };

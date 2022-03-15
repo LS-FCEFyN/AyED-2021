@@ -1,7 +1,7 @@
 #include "Queue.hxx"
 
 /* Implementation of QueueNode constructor */
-template<typename T> QueueNode<T>::QueueNode(T data)
+template<typename T> explicit QueueNode<T>::QueueNode(T data)
 {
     this->data = data ;
     next = nullptr ;

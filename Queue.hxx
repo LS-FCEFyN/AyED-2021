@@ -6,7 +6,7 @@ class QueueNode {
 	public:
 		T data;
 		QueueNode<T> *next;
-		QueueNode(T);
+		explicit QueueNode(T);
 };
 
 

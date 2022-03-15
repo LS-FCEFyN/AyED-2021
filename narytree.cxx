@@ -1,13 +1,31 @@
 #include "./narytree.hxx"
-template <typename T> nary_tree_node<T>::nary_tree_node(T data) {
+template <typename T> explicit nary_tree_node<T>::nary_tree_node(T data) {
   sibling = child = nullptr;
+  nivel = 0;
   this->data = data;
 }
 
-template <typename T> nary_tree<T>::nary_tree(int N) {
+template <typename T> explicit nary_tree<T>::nary_tree(int N) {
+    parent = nullptr;
     q = new Queue<nary_tree_node<T>*>();
     q1 = new Queue<nary_tree_node<T>*>();
     n = N;
+}
+
+
+template <typename T> explicit nary_tree<T>::nary_tree(const nary_tree& ntree) {
+    parent = ntree.parent;
+    q = malloc(sizeof(ntree.q));
+    q = ntree.q;
+    q1 = malloc(sizeof(ntree.q1));
+    q1 = ntree.q1
+    n = ntree.n;
+}
+
+T&& nary_tree<T>::operator=() noexcept {
+    q = ntree.q;
+    q1 = ntree.q1
+    n = ntree.n;
 }
 
 template <typename T> void nary_tree<T>::addChild(T data) {

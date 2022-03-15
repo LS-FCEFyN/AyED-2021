@@ -4,7 +4,7 @@
 template <class T>
 class StackNode {
 public:
-    StackNode(T);
+    explicit StackNode(T);
     T data{};
     StackNode<T>* next;
 };
