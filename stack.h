@@ -18,11 +18,5 @@ struct stack
 };
 
 struct stack *initialize_stack ();
-static struct stack_node *initialize_stack_node (void *data);
-static void push (struct stack *, void *);
-static void pop (struct stack *);
-static void *peek (struct stack *);
-static void clear (struct stack *);
-static int isEmpty (struct stack *);
 
 #endif

@@ -1,6 +1,13 @@
 #include "stack.h"
 #include <stdlib.h>
 
+static struct stack_node *initialize_stack_node (void *data);
+static void push (struct stack *, void *);
+static void pop (struct stack *);
+static void *peek (struct stack *);
+static void clear (struct stack *);
+static int isEmpty (struct stack *);
+
 static int
 isEmpty (struct stack *self)
 {

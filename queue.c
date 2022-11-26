@@ -1,6 +1,13 @@
 #include "queue.h"
 #include <stdlib.h>
 
+static struct queue_node *initialize_queue_node (void *);
+static void enqueue (struct queue *, void *);
+static void dequeue (struct queue *);
+static void *front (struct queue *);
+static void clear (struct queue *);
+static int isEmpty (struct queue *);
+
 static int
 isEmpty (struct queue *self)
 {
@@ -61,7 +68,7 @@ clear (struct queue *self)
 }
 
 struct queue *
-initialize_queue ()
+initialize_queue (void)
 {
   struct queue *tmp = malloc (sizeof (struct queue));
   tmp->head = (void *) 0;
