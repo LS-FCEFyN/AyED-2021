@@ -23,6 +23,10 @@ struct nary_tree {
   int (*findNodeDepth)(struct nary_tree *self, struct nary_tree_node *node);
 
   void (*balanceTree)(struct nary_tree *self);
+
+  void (*print)(struct nary_tree *, struct nary_tree_node *, int);
+
+  void (*clear)(struct nary_tree *);
 };
 
 struct nary_tree *initialize_nary_tree(int);
