@@ -1,21 +1,16 @@
 #include "nary-tree.h"
 #include "queue.h"
+#include "stack.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-
-static void bfs(struct nary_tree *);
+#include <string.h>
 
 static void insert(struct nary_tree *, void *);
 static void removeNode(struct nary_tree *, struct nary_tree_node *);
 
-static struct nary_tree_node *bfsSearch(struct nary_tree *, void *);
-static struct nary_tree_node *findMinimum(struct nary_tree *);
-static struct nary_tree_node *findMaximum(struct nary_tree *);
-
-static int findNodeHeight(struct nary_tree *, struct nary_tree_node *);
-static int findNodeDepth(struct nary_tree *, struct nary_tree_node *);
-
-static void balanceTree(struct nary_tree *);
+static struct nary_tree_node *bfSearch(struct nary_tree *, void *);
+static struct nary_tree_node *dfSearch(struct nary_tree *, void *);
 
 static void printTree(struct nary_tree *, struct nary_tree_node *, int);
 
@@ -28,15 +23,10 @@ struct nary_tree *initialize_nary_tree(int numberOfChildren) {
   temp->root = (void *)0;
   temp->insert = &insert;
   temp->remove = &removeNode;
-  temp->bfsSearch = &bfsSearch;
-  temp->findMinimum = &findMinimum;
-  temp->findMaximum = &findMaximum;
-  temp->findNodeHeight = &findNodeHeight;
-  temp->findNodeDepth = &findNodeDepth;
-  temp->balanceTree = &balanceTree;
-  temp->print = &printTree;
+  temp->bfSearch = &bfSearch;
+  temp->dfSearch = &dfSearch;
   temp->clear = &free_nary_tree;
-  temp->numOfChildrenPerLevel = numberOfChildren;
+  temp->numOfChildrenPerLevel = (numberOfChildren > 0) ? numberOfChildren : 1;
   return temp;
 };
 
@@ -104,45 +94,66 @@ static void insert(struct nary_tree *self, void *data) {
 
 static void removeNode(struct nary_tree *self, struct nary_tree_node *node) {}
 
-static struct nary_tree_node *bfsSearch(struct nary_tree *self, void *data) {
+static struct nary_tree_node *bfSearch(struct nary_tree *self, void *data) {
+  if (self->root == (void *)0) {
+    return (void *)0;
+  }
+
+  struct queue *q = initialize_queue();
+  q->enqueue(q, self->root);
+
+  while (!q->isEmpty(q)) {
+    struct nary_tree_node *current = q->front(q);
+    q->dequeue(q);
+
+    if (memcmp(current->data, data, sizeof(void *)) == 0) {
+      q->clear(q);
+      free(q);
+      return current;
+    }
+
+    for (int i = 0; i < current->currentChildrenOnLevel; i++) {
+      q->enqueue(q, current->children[i]);
+    }
+  }
+
+  q->clear(q);
+  free(q);
   return (void *)0;
 }
 
-static struct nary_tree_node *findMinimum(struct nary_tree *self) {
+static struct nary_tree_node *dfSearch(struct nary_tree *self, void *data) {
+  if (self->root == (void *)0) {
+    return (void *)0;
+  }
+
+  struct stack *s = initialize_stack();
+  s->push(s, self->root);
+
+  while (!s->isEmpty(s)) {
+    struct nary_tree_node *current = s->peek(s);
+    s->pop(s);
+
+    if (current->data == data) {
+      s->clear(s);
+      free(s);
+      return current;
+    }
+
+    for (int i = current->currentChildrenOnLevel - 1; i >= 0; i--) {
+      if (current->children[i] != (void *)0) {
+        s->push(s, current->children[i]);
+      }
+    }
+  }
+
+  s->clear(s);
+  free(s);
   return (void *)0;
-}
-
-static struct nary_tree_node *findMaximum(struct nary_tree *self) {
-  return (void *)0;
-}
-
-static int findNodeHeight(struct nary_tree *self, struct nary_tree_node *node) {
-  return 0;
-}
-
-static int findNodeDepth(struct nary_tree *self, struct nary_tree_node *node) {
-  return 0;
-}
-
-static void balanceTree(struct nary_tree *self) {}
-
-void printTree(struct nary_tree *tree, struct nary_tree_node *node, int level) {
-  if (node == NULL) {
-    return;
-  }
-  printf("|");
-  for (int i = 0; i < level; i++) {
-    printf("---|");
-  }
-  printf(" %s\n", (char *)node->data);
-
-  for (int i = 0; i < node->currentChildrenOnLevel; i++) {
-    printTree(tree, node->children[i], level + 1);
-  }
 }
 
 void free_nary_tree_node(struct nary_tree_node *node) {
-  if (node == NULL) {
+  if (node == (void *)0) {
     return;
   }
   for (int i = 0; i < node->currentChildrenOnLevel; i++) {

@@ -1,32 +1,47 @@
 #include "nary-tree.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
 
-int main(int argc, char *argv[]) {
-  if (argc != 2) {
-    printf("Usage: %s [filename]\n", argv[0]);
-    return 1;
+
+size_t calculate_memory_usage_node(struct nary_tree_node *node) {
+  if (node == NULL) {
+    return 0;
   }
+
+  size_t memory_usage = sizeof(struct nary_tree_node);
+
+  for (int i = 0; i < node->currentChildrenOnLevel; i++) {
+    memory_usage += calculate_memory_usage_node(node->children[i]);
+  }
+
+  memory_usage += sizeof(struct nary_tree_node *) * node->currentChildrenOnLevel;
+  return memory_usage + sizeof(struct nary_tree);
+}
+
+
+
+int main(int argc, char *argv[])
+{
 
   struct nary_tree *tree = initialize_nary_tree(2);
 
-  char *filename = argv[1];
-  FILE *file = fopen(filename, "r");
-  if (file == NULL) {
-    printf("Could not open file '%s'\n", filename);
-    return 1;
-  }
+  char *data1 = "A";
+  char *data2 = "B";
+  char *data3 = "C";
+  char *data4 = "D";
+  char *data5 = "E";
+  char *data6 = "F";
 
-  char word[256];
-  while (fscanf(file, "%s", word) == 1) {
-    tree->insert(tree, strdup(word)); // insert word to the tree
-  }
+  tree->insert(tree, data1);
+  tree->insert(tree, data2);
+  tree->insert(tree, data3);
+  tree->insert(tree, data4);
+  tree->insert(tree, data5);
 
-  fclose(file);
+  printf("Memory usage: %zu bytes\n", calculate_memory_usage_node(tree->root));
 
-  // tree->print(tree, tree->root, 0);
   tree->clear(tree);
+  free(tree);
 
   return 0;
 }

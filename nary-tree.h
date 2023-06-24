@@ -15,16 +15,8 @@ struct nary_tree {
   void (*insert)(struct nary_tree *self, void *data);
   void (*remove)(struct nary_tree *self, struct nary_tree_node *node);
 
-  struct nary_tree_node *(*bfsSearch)(struct nary_tree *self, void *data);
-  struct nary_tree_node *(*findMinimum)(struct nary_tree *self);
-  struct nary_tree_node *(*findMaximum)(struct nary_tree *self);
-
-  int (*findNodeHeight)(struct nary_tree *self, struct nary_tree_node *node);
-  int (*findNodeDepth)(struct nary_tree *self, struct nary_tree_node *node);
-
-  void (*balanceTree)(struct nary_tree *self);
-
-  void (*print)(struct nary_tree *, struct nary_tree_node *, int);
+  struct nary_tree_node *(*bfSearch)(struct nary_tree *self, void *data);
+  struct nary_tree_node *(*dfSearch)(struct nary_tree *self, void* data);
 
   void (*clear)(struct nary_tree *);
 };
