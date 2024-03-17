@@ -10,7 +10,7 @@ class Tree
 public:
     Tree();
     void insert(T);
-    void remove();
+    void remove(T);
     T &bfs(T);
     T &dfs(T);
     void clear();
